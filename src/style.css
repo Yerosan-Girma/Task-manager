@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ── Card ── */
+.app-wrapper {
+  width: 100%;
+  max-width: 720px;
+}
+
+.app-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Header ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.app-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+
+.task-counter {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6c63ff;
+  background: #f0eeff;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* ── Progress Bar ── */
+.progress-bar-wrapper {
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6c63ff, #a78bfa);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* ── Input Row ── */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.task-input::placeholder {
+  color: #bbb;
+}
+
+.task-input:focus {
+  border-color: #6c63ff;
+}
+
+.add-btn {
+  padding: 15px 28px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: #574fd6;
+}
+
+.add-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Filter Row ── */
+.filter-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 11px 0;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #6c63ff;
+  color: #6c63ff;
+}
+
+.filter-btn--active {
+  background: #6c63ff;
+  border-color: #6c63ff;
+  color: #fff;
+}
+
+/* ── Task List ── */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Task Item ── */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.task-item:hover {
+  background: #f5f3ff;
+  border-color: #ddd8ff;
+}
+
+.task-item--done {
+  background: #f8f8f8;
+  border-color: #efefef;
+}
+
+/* ── Check Button ── */
+.check-btn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  border: 2px solid #d0d0d0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.check-btn:hover {
+  border-color: #6c63ff;
+}
+
+.check-btn--checked {
+  background: #6c63ff;
+  border-color: #6c63ff;
+}
+
+/* ── Task Text ── */
+.task-text {
+  flex: 1;
+  font-size: 1.05rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s;
+  word-break: break-word;
+}
+
+.task-text--done {
+  text-decoration: line-through;
+  color: #bbb;
+}
+
+/* ── Delete Button ── */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: #ef4444;
+  background: #fff0f0;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #bbb;
+  font-size: 0.95rem;
+}
