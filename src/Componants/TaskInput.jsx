@@ -1,21 +1,19 @@
 function TaskInput({ task, setTask, addTask }) {
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') addTask();
-  };
-
   return (
-    <div className="input-row">
+    <form className="input-row" onSubmit={addTask}>
+      <label className="sr-only" htmlFor="new-task">New task</label>
       <input
+        id="new-task"
         className="task-input"
         value={task}
-        onChange={(e) => setTask(e.target.value)}
-        onKeyDown={handleKeyDown}
+        onChange={(event) => setTask(event.target.value)}
         placeholder="Add a new task..."
+        autoComplete="off"
       />
-      <button className="add-btn" onClick={addTask}>
+      <button className="add-btn" type="submit">
         + Add
       </button>
-    </div>
+    </form>
   );
 }
 

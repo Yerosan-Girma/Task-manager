@@ -2,14 +2,16 @@ function Filter({ setFilter, activeFilter }) {
   const filters = ['all', 'active', 'completed'];
 
   return (
-    <div className="filter-row">
-      {filters.map((f) => (
+    <div className="filter-row" role="group" aria-label="Filter tasks">
+      {filters.map((filter) => (
         <button
-          key={f}
-          className={`filter-btn ${activeFilter === f ? 'filter-btn--active' : ''}`}
-          onClick={() => setFilter(f)}
+          key={filter}
+          type="button"
+          className={`filter-btn ${activeFilter === filter ? 'filter-btn--active' : ''}`}
+          aria-pressed={activeFilter === filter}
+          onClick={() => setFilter(filter)}
         >
-          {f.charAt(0).toUpperCase() + f.slice(1)}
+          {filter.charAt(0).toUpperCase() + filter.slice(1)}
         </button>
       ))}
     </div>
