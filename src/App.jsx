@@ -64,6 +64,10 @@ function App() {
     );
   };
 
+  const clearCompletedTasks = () => {
+    setTasks((currentTasks) => currentTasks.filter((item) => !item.completed));
+  };
+
   // Apply the selected view without changing the saved source list.
   const filteredTasks = tasks.filter((item) => {
     if (filter === 'completed') return item.completed;
@@ -98,6 +102,17 @@ function App() {
 
         <TaskInput task={task} setTask={setTask} addTask={addTask} />
         <Filter setFilter={setFilter} activeFilter={filter} />
+        {completedCount > 0 && (
+          <div className="task-actions">
+            <button
+              className="clear-completed-btn"
+              type="button"
+              onClick={clearCompletedTasks}
+            >
+              Clear completed ({completedCount})
+            </button>
+          </div>
+        )}
         <TaskList
           tasks={filteredTasks}
           deleteTask={deleteTask}

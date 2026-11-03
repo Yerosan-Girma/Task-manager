@@ -169,6 +169,28 @@ button:focus-visible, input:focus-visible {
   color: #fff;
 }
 
+/* Optional bulk action for completed tasks */
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: -8px 0 16px;
+}
+
+.clear-completed-btn {
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: #666;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.clear-completed-btn:hover {
+  color: #b42318;
+}
+
 /* Task list and individual task controls */
 .task-list {
   list-style: none;
