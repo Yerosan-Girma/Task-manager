@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Base/reset and accessibility helpers */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -38,7 +37,6 @@ button:focus-visible, input:focus-visible {
   border: 0;
 }
 
-/* Main card and app header */
 .app-wrapper {
   width: 100%;
   max-width: 720px;
@@ -74,7 +72,36 @@ button:focus-visible, input:focus-visible {
   border-radius: 20px;
 }
 
-/* Progress indicator */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: #f5f3ff;
+  border: 1px solid #e7e3ff;
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
 .progress-bar-wrapper {
   height: 6px;
   background: #f0f0f0;
@@ -90,7 +117,6 @@ button:focus-visible, input:focus-visible {
   transition: width 0.4s ease;
 }
 
-/* Task creation form */
 .input-row {
   display: flex;
   gap: 10px;
@@ -138,7 +164,6 @@ button:focus-visible, input:focus-visible {
   transform: scale(0.97);
 }
 
-/* Task filter controls */
 .filter-row {
   display: flex;
   gap: 8px;
@@ -169,15 +194,15 @@ button:focus-visible, input:focus-visible {
   color: #fff;
 }
 
-/* Optional bulk action for completed tasks */
 .task-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
   margin: -8px 0 16px;
 }
 
-.clear-completed-btn {
-  padding: 6px 0;
+.clear-completed-btn,
+.reset-btn {
   border: 0;
   background: transparent;
   color: #666;
@@ -187,11 +212,9 @@ button:focus-visible, input:focus-visible {
   text-underline-offset: 3px;
 }
 
-.clear-completed-btn:hover {
-  color: #b42318;
-}
+.clear-completed-btn:hover { color: #b42318; }
+.reset-btn:hover { color: #4f46e5; }
 
-/* Task list and individual task controls */
 .task-list {
   list-style: none;
   display: flex;
@@ -281,7 +304,6 @@ button:focus-visible, input:focus-visible {
   background: #fff0f0;
 }
 
-/* Empty state */
 .empty-state {
   text-align: center;
   padding: 32px 16px;
@@ -289,7 +311,6 @@ button:focus-visible, input:focus-visible {
   font-size: 0.95rem;
 }
 
-/* Narrow viewport adjustments */
 @media (max-width: 560px) {
   body {
     padding: 16px;
@@ -302,6 +323,10 @@ button:focus-visible, input:focus-visible {
 
   .app-title {
     font-size: 1.8rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 
   .task-item {
@@ -318,7 +343,6 @@ button:focus-visible, input:focus-visible {
   }
 }
 
-/* Respect the operating system's reduced-motion preference. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;

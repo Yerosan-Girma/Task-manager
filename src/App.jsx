@@ -3,8 +3,6 @@ import TaskList from './Componants/TaskList';
 import TaskInput from './Componants/TaskInput';
 import Filter from './Componants/Filter';
 
-// Read valid task records once when the app initializes; bad or unavailable
-// browser storage should not prevent the task manager from starting.
 function loadTasks() {
   try {
     const saved = JSON.parse(localStorage.getItem('tasks') || '[]');
@@ -18,7 +16,6 @@ function loadTasks() {
         )
       : [];
   } catch {
-    // Ignore unavailable storage or invalid JSON and start with an empty list.
     return [];
   }
 }
@@ -28,13 +25,11 @@ function App() {
   const [tasks, setTasks] = useState(loadTasks);
   const [filter, setFilter] = useState('all');
 
-  // Persist every task-list change. Storage failures are non-fatal: the current
-  // in-memory session remains interactive even if it cannot be saved.
   useEffect(() => {
     try {
       localStorage.setItem('tasks', JSON.stringify(tasks));
     } catch {
-      // The app remains usable when browser storage is disabled or full.
+      // Storage can fail in private browsing or restricted environments.
     }
   }, [tasks]);
 
@@ -68,7 +63,11 @@ function App() {
     setTasks((currentTasks) => currentTasks.filter((item) => !item.completed));
   };
 
-  // Apply the selected view without changing the saved source list.
+  const resetTasks = () => {
+    setTasks([]);
+    setFilter('all');
+  };
+
   const filteredTasks = tasks.filter((item) => {
     if (filter === 'completed') return item.completed;
     if (filter === 'active') return !item.completed;
@@ -76,6 +75,7 @@ function App() {
   });
 
   const completedCount = tasks.filter((item) => item.completed).length;
+  const activeCount = tasks.length - completedCount;
   const totalCount = tasks.length;
   const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
@@ -88,6 +88,21 @@ function App() {
             {completedCount}/{totalCount} done
           </span>
         </header>
+
+        <div className="stats-grid" aria-label="Task summary">
+          <div className="stat-card">
+            <span className="stat-label">Active</span>
+            <strong className="stat-value">{activeCount}</strong>
+          </div>
+          <div className="stat-card">
+            <span className="stat-label">Completed</span>
+            <strong className="stat-value">{completedCount}</strong>
+          </div>
+          <div className="stat-card">
+            <span className="stat-label">Progress</span>
+            <strong className="stat-value">{Math.round(progress)}%</strong>
+          </div>
+        </div>
 
         <div
           className="progress-bar-wrapper"
@@ -102,8 +117,9 @@ function App() {
 
         <TaskInput task={task} setTask={setTask} addTask={addTask} />
         <Filter setFilter={setFilter} activeFilter={filter} />
-        {completedCount > 0 && (
-          <div className="task-actions">
+
+        <div className="task-actions">
+          {completedCount > 0 && (
             <button
               className="clear-completed-btn"
               type="button"
@@ -111,8 +127,14 @@ function App() {
             >
               Clear completed ({completedCount})
             </button>
-          </div>
-        )}
+          )}
+          {tasks.length > 0 && (
+            <button className="reset-btn" type="button" onClick={resetTasks}>
+              Reset list
+            </button>
+          )}
+        </div>
+
         <TaskList
           tasks={filteredTasks}
           deleteTask={deleteTask}
