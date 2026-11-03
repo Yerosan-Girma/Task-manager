@@ -3,6 +3,7 @@ function Filter({ setFilter, activeFilter }) {
 
   return (
     <div className="filter-row" role="group" aria-label="Filter tasks">
+      {/* Keep the selected view explicit for both visual and assistive feedback. */}
       {filters.map((filter) => (
         <button
           key={filter}

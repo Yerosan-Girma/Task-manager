@@ -3,6 +3,8 @@ import TaskList from './Componants/TaskList';
 import TaskInput from './Componants/TaskInput';
 import Filter from './Componants/Filter';
 
+// Read valid task records once when the app initializes; bad or unavailable
+// browser storage should not prevent the task manager from starting.
 function loadTasks() {
   try {
     const saved = JSON.parse(localStorage.getItem('tasks') || '[]');
@@ -26,6 +28,8 @@ function App() {
   const [tasks, setTasks] = useState(loadTasks);
   const [filter, setFilter] = useState('all');
 
+  // Persist every task-list change. Storage failures are non-fatal: the current
+  // in-memory session remains interactive even if it cannot be saved.
   useEffect(() => {
     try {
       localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -60,6 +64,7 @@ function App() {
     );
   };
 
+  // Apply the selected view without changing the saved source list.
   const filteredTasks = tasks.filter((item) => {
     if (filter === 'completed') return item.completed;
     if (filter === 'active') return !item.completed;
